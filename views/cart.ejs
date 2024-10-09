@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/png" href="/img/final made.png">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/css/bootstrap.css">
+    <link rel="stylesheet" href="/css/products.css">
+    <link rel="stylesheet" href="/css/cart.css">
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap" rel="stylesheet">
+
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="/js/carousel.js" defer></script>
+    <!-- <script src="https://unpkg.com/sweetalert2@7.8.2/dist/sweetalert2.all.js"></script> -->
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+<script src="/js/mobileNavbar.js" defer></script>
+<script src="/js/cart.js" defer></script>
+<title>Products Page</title>
+</head>
+<body>
+    <%- include('./header') %>
+    <%- include('./navbar') %>
+    <%- include('./carousel') %>
+
+<section class="CartsProduct">
+    <div class="CartContainer">
+        <div class="cartHeading">
+            <h1>Cart</h1>
+        </div>
+          <table class="cartTable" >
+            <tr>
+              <th class=""> </th>
+              <th class=""></th>
+              <th>Product</th>
+              <th>Price</th>
+              <th>Quantity</th>
+              <th>SubTotal</th>
+            </tr>
+            <% for(let product of cartProducts){%>
+            <tr>
+              <td class="crossButton" data-id="<%=product.ProductId %>">
+                <i class="fa fa-times closeIcon" aria-hidden="true"></i>
+              </td>
+              <td>
+                <img class="productImage" src="<%=product.PImgUrl %>" alt="<%=product.ProductHeading %>">
+              </td>
+              <td class="underline">
+                <a href="/productDescription/<%=product.ProductId%>"><%=product.ProductHeading %></a>
+              </td>
+              <td>
+                <%let price=product.ProductPrize %>
+                <%if(price=='0'){%>
+                  <div class="originalPrize" data-id="<%=product._id %>">₹ <%=product.ProductOriginalPrize%></div>  
+              <%  }else{%>
+                  <div class="originalPrize" data-id="<%=product._id %>">₹ <%=price%></div>
+              <%  }         %>       
+              </td>
+              <td>
+                <div>
+                  <input class="ProductQty" type="number" min="1" value="<%=product.ProductQuantity%>" data-id="<%=product._id%>">
+                </div>
+              </td>
+              <td class="subTotal">
+              </td>
+            </tr>
+          <% } %>
+          </table>
+          <div class="updateButton">
+            <button id="update" class="disabled">
+              Update
+            </button>
+          </div>
+              <!-- cart totals -->
+              <div class="row align-items-start">
+                <div class="col-6">
+                </div>
+                <div class="col-6">
+                  <h2 class="white">Cart Totals</h1>
+                  <div class="row extraSpace white">
+                    <div class="col upperCase subTotalCol">
+                      <h5>SubTotal</h5>
+                    </div>
+                    <div class="CartSubTotal col amountSubTotal">
+                      
+                    </div>
+                  </div>
+                  <div class="row line">
+                  </div>
+                  <div class="row white totalrow">
+                    <div class="col upperCase">
+                      <h5>Total</h5>
+                    </div>
+                    <div class="CartTotal col amountSubTotal">
+                      
+                    </div>
+                  </div>
+
+                </div>
+              </div>      
+        <!-- <h1>Cart Totals</h1>
+      <div class="row-md-6">
+        <h2>SubTotal</h2>
+        <p>hello</p>
+      </div>
+      <div>
+        <h2>Total</h2>
+        <p>hiii</p>
+      </div class="enabled">
+      <button>Proceed to checkout</button> -->
+    </div>
+        
+    </div>
+</section>
+
+
+
+<%- include('./footer')%>
+
+</body>
+</html>

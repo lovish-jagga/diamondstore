@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/png" href="/img/final made.png">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/css/bootstrap.css">
+    <link rel="stylesheet" href="/css/products.css">
+
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+<script src="/js/carousel.js" defer></script>
+<script src="/js/imageCarousel.js" defer></script>
+<script src="/js/mobileNavbar.js" defer></script>
+<script src="/js/addedToCart.js" defer></script>
+<script src="/js/heart.js" defer></script>
+<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <title>Products Page</title>
+</head>
+<body>
+    <%- include('./header') %>
+    <%- include('./navbar') %>
+    <%- include('./carousel') %>
+    <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+      <ol class="carousel-indicators">
+        <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
+        <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
+        <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
+      </ol>
+      <div class="carousel-inner">
+        <div class="carousel-item active">
+          <a href="/shop"><img class="d-block w-100" src="/img/carousel1.jpg" alt="First slide"></a>
+        </div>
+        <div class="carousel-item">
+          <a href="/shop"><img class="d-block w-100" src="/img/carousel2.jpg" alt="Second slide"></a>
+        </div>
+        <div class="carousel-item">
+          <a href="/shop"><img class="d-block w-100" src="/img/carousel3.jpg" alt="Third slide"></a>
+        </div>
+      </div>
+      <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="sr-only">Previous</span>
+      </a>
+      <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="sr-only">Next</span>
+      </a>  
+    </div>
+    <!--top rated jeweleries-->
+    <div class="jewcontainer">
+      <div class="row">
+        <div class="col-4">
+          <a href="/shop"><div class="card"><img src="/img/jewelery1.jpg" alt="jewelery"></div></a>
+        </div>
+        <div class="col-4">
+          <a href="/shop"><div class="card"><img src="/img/jewelery2.jpg" alt="jewelery"></div></a>
+        </div>
+        <div class="col-4">
+          <a href="/shop"><div class="card"><img src="/img/jewelery3.jpg" alt="jewelery"></div></a>
+        </div>
+      </div>
+    </div>
+    <% let i=0; %>
+<div class="newProductsContainer">
+  <div class="heading">
+      New Products
+  </div>
+  <div class="grid-container">
+    <% for(let product of allProducts){
+      if(i<=5){
+        let k=true;  
+        let heart=true;
+    %>
+      <div class="grid-item">
+        <% if(product.IsBestSeller) {%>
+        <span class="product_item_bestseller"> 
+          Bestseller
+        </span>
+        <% }
+        if(product.OnSale){ %>
+          <span class="discount-percent"> 
+        -<%=product.SalePercentage%>%
+      </span>            
+        <% }%>
+        <a href="../productDescription/<%=product._id%>">
+          <img src="<%=product.PImgUrl%>" alt="<%=product.alternateName%>">
+        </a>    
+      <div class="gridBody" >
+        <div class="addToCartContainer gridAllContent">
+          <div class="gridHeading">
+            <%=product.ProductHeading %>
+          </div>
+          <div class="gridAmount gridHeading">
+            <% if(product.SalePrize!='0'){%>
+              ₹<%=product.SalePrize%>
+              <del>₹<%=product.ProductOriginalPrize %></del>
+            <% } else{ %>
+              ₹ <%=product.ProductOriginalPrize %>
+            <% } %>
+          </div>
+          <div  class="gridHeading addToCartButton">
+              <%
+              for(let check of checkAddedProductOrNot){
+              if(JSON.stringify(product._id) === JSON.stringify(check.ProductId) )
+              {
+              if(check.addToCart){%>
+                <button class="addedToCartOrNot" data-id="<%=product._id%>">
+                  Add To Cart
+              <i class="fa fa-check" aria-hidden="true"></i>
+                </button>
+              <button class="eye" data-id="<%=product._id%>"><a href="../productDescription/<%=product._id%>"><i class="fa fa-eye" style="color: black;" aria-hidden="true"></i></a>
+              </button>
+              <%  k=false;  }
+          }}
+         if(k){%>
+          
+            <button class="addedToCartOrNot" data-id="<%=product._id%>">
+              <i class="fa fa-shopping-basket heart" aria-hidden="true"></i>
+              Add To Cart
+            </button>
+                <button class="hide eye" data-id="<%=product._id%>"><a href="../productDescription/<%=product._id%>"><i class="fa fa-eye" style="color: black;" aria-hidden="true"></i></a>
+              </button>
+          <%}
+          for(let heartLiked of checkHeartAddedOrNot){
+                if(JSON.stringify(product._id) === JSON.stringify(heartLiked.ProductId) ){
+              if(heartLiked.isLiked){%>
+              <button class="heartClicked" data-id="<%=product._id%>"><i class="fa fa-heart" aria-hidden="true"></i></button>
+              <% heart=false;}}
+              }
+          if(heart){%>
+                <button class="heartClicked" data-id="<%=product._id%>"><i class="fa fa-heart-o heart"></i></button>
+                <%}%>
+            </div>
+            <%if(!heart ){%>
+          <div>
+              <p class="heartWishList">
+                the product is already in the wishlist!<a href="/heart">Browse Wishlist</a>  
+              </p>
+          </div>  
+          <%}%>
+
+        </div>
+      </div>
+      </div>
+    <% } i++;}%>
+
+</div>
+</div>
+<!--Image--> 
+<div class="headImage">
+  <a href="/shop"><img src="/img/diamondHeavensImage.jpg" alt="Nature" class="responsive" width="600" height="400"></a>
+</div>
+
+<%- include('./footer')%>
+</body>
+</html>

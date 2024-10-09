@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/png" href="/img/final made.png">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/css/bootstrap.css">
+    <link rel="stylesheet" href="/css/products.css">
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    <script src="/js/carousel.js" defer></script>
+    <script src="/js/heart.js" defer></script>
+    <script src="/js/addedToCart.js" defer></script>
+    
+    <!-- <script src="/js/bootstrap.min.js" defer></script> -->
+    <title>Products Page</title>
+</head>    
+<body>
+  <%- include('./header') %>
+  <%- include('./carousel') %>
+  
+  </header>
+    <section>
+        <div class="newProductsContainer">
+            <div class="heading">
+                We found <%=allProducts.length %> results
+            </div>
+            <div class="grid-container-search">
+              <!-- product_item -->
+              <% for(let product of allProducts) {%>
+              <div class="grid-item">
+                <% if(product.IsBestSeller) {%>
+                <span class="product_item_bestseller"> 
+                  Bestseller
+                </span>
+                <% }
+                if(product.OnSale){ %>
+                  <div class="box">
+	<span class="wdp-ribbon wdp-ribbon-six"><span class="wdp-ribbon-inner-wrap"><span class="wdp-ribbon-border"></span><span class="wdp-ribbon-text">Sale!</span></span>
+</div>            
+                <% }%>
+                <a href="../productDescription/<%=product._id%>">
+                  <img src="<%=product.PImgUrl%>" alt="<%=product.alternateName%>">
+                </a>    
+              <div class="gridBody" >
+                <div class="addToCartContainer gridAllContent">
+                  <div class="gridHeading">
+                    <%=product.ProductHeading %>
+                  </div>
+                  <div class="gridAmount gridHeading">
+                    <% if(product.SalePrize!='0'){%>
+                      ₹<%=product.SalePrize%>
+                      <del>₹<%=product.ProductOriginalPrize %></del>
+                    <% } else{ %>
+                      ₹ <%=product.ProductOriginalPrize %>
+                    <% } %>
+                  </div>
+                  <div class="gridHeading addToCartButton">
+              <%if(product.AddToCart){%>
+                <button class="addedToCartOrNot" data-id="<%=product._id%>">
+                  Add To Cart
+              <i class="fa fa-check" aria-hidden="true"></i>
+                </button>
+              <button class="eye" data-id="<%=product._id%>"><a href="../productDescription/<%=product._id%>"><i class="fa fa-eye" style="color: black;" aria-hidden="true"></i></a>
+              </button>
+              <%}else{%>
+                <button class="addedToCartOrNot" data-id="<%=product._id%>">
+              <i class="fa fa-shopping-basket heart" aria-hidden="true"></i>
+              Add To Cart
+
+            </button>
+                <button class="hide eye" data-id="<%=product._id%>"><a href="../productDescription/<%=product._id%>"><i class="fa fa-eye" style="color: black;" aria-hidden="true"></i></a>
+              </button>
+              <%}%>
+              <%if(product.isLiked){%>
+              <button class="heartClicked" data-id="<%=product._id%>"><i class="fa fa-heart" aria-hidden="true"></i></button>
+              <%}else{%>
+                <button class="heartClicked" data-id="<%=product._id%>"><i class="fa fa-heart-o heart"></i></button>
+                <%}%>
+                  </div> 
+                  <%if(product.isLiked){%>
+          <div>
+              <p class="heartWishList">
+                the product is already in the wishlist!<a href="/heart">Browse Wishlist</a>  
+              </p>
+          </div>  
+          <%}%> 
+
+                </div>
+              </div>
+              </div>
+              <% }%>
+          </div>
+          </div>
+    </section>
+</body>
+</html>

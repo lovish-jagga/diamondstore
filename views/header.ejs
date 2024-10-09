@@ -1,0 +1,78 @@
+<header>
+    <nav class="navbar navbar-light dark ">
+      <section class="login_signup_container">
+        <% if(locals.fullName){ %>
+          <p class="login">Hi,<%=locals.fullName %></p>
+          <a href="../logout" class="login">Log Out</a>
+        <% }else{%>
+          <!-- <a href="#adminLoginModal" data-toggle="modal" class="login">Admin Login</a> -->
+          <a href="#userSignInModal" data-toggle="modal" class="login">User SignIn</a>
+          <a href="#userLogInModal" data-toggle="modal" class="login">User LogIn</a>
+<%}%>  
+      </section>
+      <div class="nav_container" >
+        <div class="logo_container">
+          <a href="/"><img src="/img/ShoppingCart-logo.png" class="image_logo" alt="Diamond Store Logo"></a>
+        </div>
+        <div class="search_container">
+          <div class="search_icon_container">
+            <form action="/searchedItems" method="post">
+              <input type="text" placeholder="Search Products" name="search">
+              <button type="submit" class="submitSearch"><i class="fa fa-search"></i></button>
+            </form>      
+            <!-- <script>
+
+              const btn = document.getElementById('searchSubmit');
+              btn.addEventListener('click', event => {
+                event.preventDefault();
+              
+                // console.log(firstNameInput.value);
+                // console.log(lastNameInput.value);
+              });
+              
+                  </script>  -->
+
+            <!-- <form>
+              <input id="first" name="first" />
+              <input id="last" name="last" />
+        
+              <button id="btn">Click</button>
+            </form>
+            <script>
+
+              const btn = document.getElementById('btn');
+              
+              const firstNameInput = document.getElementById('first');
+              const lastNameInput = document.getElementById('last');
+              
+              btn.addEventListener('click', event => {
+                event.preventDefault();
+              
+                // console.log(firstNameInput.value);
+                // console.log(lastNameInput.value);
+              });
+              
+                  </script> -->
+              
+          </div>
+          <div class="wishListContainer">
+            <div>
+              <i class="fa fa-heart-o heart"></i>
+              <span class="likedCount"><%= likedCount.length %></span>  
+            </div>
+            <div>
+              <i class="fa fa-shopping-basket heart" aria-hidden="true"></i>
+              <span class="addToCartCount"><%= addToCartCount.length%></span>     
+            </div>
+            <!-- <div class="totalAmount">
+              Total
+              <div>
+                ₹ 0.00
+              </div>
+            </div> -->
+
+          </div>  
+        </div>
+        </div>
+      </div>
+      </nav>

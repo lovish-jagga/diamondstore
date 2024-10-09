@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/png" href="/img/final made.png">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/css/bootstrap.css">
+    <link rel="stylesheet" href="/css/productDescription.css">
+    <link rel="stylesheet" href="/css/products.css">
+<script src="/js/carousel.js" defer></script>
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+<script src="/js/productDescription.js" defer></script>
+<script src="/js/mobileNavbar.js" defer></script>
+<title>Products Page</title>
+</head>
+<body>
+
+    <main id="products">
+        <div class="container">
+          <div class="producat_wrapper">
+            <div class="producat_image">
+              <div class="img_thumbnail">
+                <img style="margin: 0" src="/img/image-product-1.jpg" alt="" />
+                <div class="img_small">
+                  <img style="margin: 0;"
+                    src="/img/image-product-1-thumbnail.jpg"
+                    alt=""
+                    class="active"
+                  />
+                  <img src="/img/image-product-2-thumbnail.jpg" alt="" />
+                  <img src="/img/image-product-3-thumbnail.jpg" alt="" />
+                  <img src="/img/image-product-4-thumbnail.jpg" alt="" />
+                </div>
+              </div>
+            </div>
+            <div class="producat_content">
+              <p class="producat_des">
+                <%=allProducts.ProductHeading %>
+              </p>
+              <div class="price">
+                <% if(allProducts.SalePercentage !='0'){ %>
+                <div class="dicscount_price">
+                    <p class="normal_price">₹<%=allProducts.SalePrize %></p>
+                    <p><span class="discount"><%=allProducts.SalePercentage %>%</span></p>
+                </div>
+                <p class="total_price"><%=allProducts.ProductOriginalPrize %></p>
+                <% } else{%>
+                  <p class="normal_price">₹<%=allProducts.ProductOriginalPrize %></p>
+                  <% } %>
+              </div>
+              <div class="qty">
+                <div class="btns">
+                  <button type="button" class="decreament">-</button>
+                  <button type="input" class="qty_numbers">1</button>
+                  <button type="button" class="increament">+</button>
+                </div>
+                  <button class="add_cart" type="submit" data-id="<%=currentProductId%>">
+                    <span><svg
+                        width="22"
+                        height="20"
+                        xmlns="http://www.w3.org/2000/svg">
+                        <path d="M20.925 3.641H3.863L3.61.816A.896.896 0 0 0 2.717 0H.897a.896.896 0 1 0 0 1.792h1l1.031 11.483c.073.828.52 1.726 1.291 2.336C2.83 17.385 4.099 20 6.359 20c1.875 0 3.197-1.87 2.554-3.642h4.905c-.642 1.77.677 3.642 2.555 3.642a2.72 2.72 0 0 0 2.717-2.717 2.72 2.72 0 0 0-2.717-2.717H6.365c-.681 0-1.274-.41-1.53-1.009l14.321-.842a.896.896 0 0 0 .817-.677l1.821-7.283a.897.897 0 0 0-.87-1.114ZM6.358 18.208a.926.926 0 0 1 0-1.85.926.926 0 0 1 0 1.85Zm10.015 0a.926.926 0 0 1 0-1.85.926.926 0 0 1 0 1.85Zm2.021-7.243-13.8.81-.57-6.341h15.753l-1.383 5.53Z"
+                          fill="#ffffff"
+                          fill-rule="nonzero"/></svg></span>
+                    <p style="margin-top: 10px;">Add to Cart</p>
+                  </button>  
+              </div>
+            </div>
+          </div>
+        </div>
+      </main>
+      <div class="modal">
+        <div class="modal_wrapper">
+          <img src="/img/icon-delete.svg" alt="" class="close_icon" />
+          <div class="producat_image_modal">
+            <div class="img_thumbnail_modal">
+              <img src="/img/image-product-1.jpg" alt="" class="m_img" />
+              <div class="img_small_modal">
+                <img
+                  src="/img/image-product-1-thumbnail.jpg"
+                  alt=""
+                  class="active"
+                />
+                <img src="/img/image-product-2-thumbnail.jpg" alt="" />
+                <img src="/img/image-product-3-thumbnail.jpg" alt="" />
+                <img src="/img/image-product-4-thumbnail.jpg" alt="" />
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+<%- include('./footer') %>
+
+
+
+
+
+</body>
+</html>
